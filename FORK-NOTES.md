@@ -1,9 +1,10 @@
 # Local fork notes
 
-- Source provided by the user: Folia-ver-26.2.x (2).zip.
-- Upstream project and branch: https://github.com/PaperMC/Folia/tree/ver/26.2.x
-- This archive does not include .git history. The workspace is a local source snapshot, not a GitHub fork and not a clone with upstream history.
-- mcVersion=26.2 and apiVersion=26.2 are intentionally unchanged. forkVersion=26.3.0 labels this custom build and does not claim Minecraft 26.3 support.
-- Bukkit.getBukkitVersion() uses bukkitVersion=26.2.0-R0.1-SNAPSHOT for compatibility with plugins that parse Bukkit's traditional version format. The current in-game kernel brand is AC04; increment the AC number by one whenever producing a changed Paperclip kernel. The actual Minecraft/API base remains 26.2.
-- The Paper upstream ref in gradle.properties comes from the supplied Folia source archive.
-- The customized performance profile and Windows launcher live in ops/; the Gradle plugin project lives in plugin-template/.
+- Base source: official PaperMC Folia branch `ver/26.3.x`.
+- This branch targets Minecraft 26.3 and is an experimental/alpha line.
+- Keep the in-game server brand `AC03` on every update; do not increment it between builds.
+- `mcVersion=26.3`, `apiVersion=26.3`, and `bukkitVersion=26.3.0-R0.1-SNAPSHOT` describe the actual 26.3 base.
+- The Windows launcher exposes all 28 logical processors and selects a heap cap from currently free RAM, up to 28 GiB, while retaining at least 3 GiB for Windows and JVM native memory.
+- `ops/config/paper-global-fragment.yml` is an override fragment; merge it into the generated config rather than replacing the full file.
+- The GT 730 cannot accelerate normal server ticking or chunk logic. Minecraft's dedicated server has no rendering workload to send to the GPU.
+- Keep the previous 26.2 source tree and server folder intact until the 26.3 Paperclip JAR and a copy of the world have been checked.

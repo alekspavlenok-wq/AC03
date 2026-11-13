@@ -18,14 +18,12 @@ include("folia-checkstyle")
 
 gradle.lifecycle.beforeProject {
     val mcVersion = providers.gradleProperty("mcVersion").get().trim()
-    val forkVersion = providers.gradleProperty("forkVersion").get().trim()
     val foliaVersionChannel = providers.gradleProperty("channel").get().trim()
-    val versionChannel = foliaVersionChannel.lowercase()
     val foliaBuildNumber = providers.environmentVariable("BUILD_NUMBER").orNull?.trim()?.toInt()
     val versionString = if (foliaBuildNumber == null) {
-        "$forkVersion-mc$mcVersion.local-SNAPSHOT"
+        "$mcVersion.local-SNAPSHOT"
     } else {
-        "$forkVersion-mc$mcVersion.build.$foliaBuildNumber-$versionChannel"
+        "$mcVersion.build.$foliaBuildNumber-${foliaVersionChannel.lowercase()}"
     }
     version = versionString
 }
